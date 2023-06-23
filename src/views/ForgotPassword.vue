@@ -55,6 +55,7 @@ import SuccessAlert from '../components/SuccessAlert.vue';
 import ErrorAlert from '../components/ErrorAlert.vue';
 import useVuelidate from '@vuelidate/core';
 import { required } from "@vuelidate/validators";
+import PasswordResetService from '../services/password-reset.service';
 
 
 export default {
@@ -77,7 +78,7 @@ export default {
         console.log(this.$route.query.token)
     },
     methods: {
-        handleReset() {
+        async handleReset() {
             this.loading = true;
             this.v$.$validate()
             if (this.v$.$error) {
@@ -91,7 +92,16 @@ export default {
             } else if (this.password != this.repeat_password){
                 this.error = 'The passwords must match.';
             } else {
-                this.reset_done = true;
+                PasswordResetService.resetPassword(this.$route.query.token, this.password).then(
+                    (response) => {
+                        console.log(response)
+                        this.reset_done = true;
+                    },
+                    (error) => {
+                        console.log(error)
+                        this.error = "The token isn't valid or it expired."
+                    },
+                )
             }
             this.loading = false;
         },
@@ -107,6 +117,6 @@ export default {
 
 <style>
 .rounded-sm {
-    background: #f1f1f1;
+    background: #f0f0f0 !important;
 }
 </style>
