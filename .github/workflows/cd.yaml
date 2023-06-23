@@ -19,7 +19,7 @@ jobs:
       - name: Context
         uses: okteto/context@latest
         with:
-          token: ${{ secrets.OKTETO_TOKEN }}
+          token: ${{ secrets.OKTETO_TOKEN_FEDE }}
 
       - name: Deploy
         uses: okteto/pipeline@latest
