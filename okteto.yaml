@@ -1,4 +1,4 @@
-name: reset-password-web
+name: web-reset-password
 
 # The build section defines how to build the images of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#build
@@ -8,15 +8,15 @@ build:
   #  - OKTETO_BUILD_BACKOFFICE-WEB_REPOSITORY: image repo
   #  - OKTETO_BUILD_BACKOFFICE-WEB_IMAGE: image name
   #  - OKTETO_BUILD_BACKOFFICE-WEB_TAG: image tag
-  reset-password:
+  web-reset-password:
     context: .
 
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
-  - okteto build -t okteto.dev/reset-password
+  - okteto build -t okteto.dev/web-reset-password
   - kubectl apply -f k8s
-  - kubectl rollout restart deployment reset-password-deployment
+  - kubectl rollout restart deployment web-reset-password-deployment
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
 # dependencies:
