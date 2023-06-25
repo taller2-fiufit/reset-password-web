@@ -13,10 +13,10 @@
                             alt="kinetix logo"
                             class="my-16 mx-auto pointer"
                         ></v-img>
-                    </v-col>
+                    </v-col> 
                     <v-divider class="mt-3" vertical thickness="1"></v-divider>
                     <v-col cols="6" offset="1" justify = "center" class="my-auto mr-14">
-                        <SuccessAlert v-if="reset_done" message="The password reset was successful."/>
+                        <SuccessAlert v-if="reset_done" :message="'The password reset for user with email ' + this.email + ' was successful.'"/>
                         <v-form fast-fail @submit.prevent="handleReset" v-if="!reset_done">
                             <div>
                                 <ErrorAlert v-if="error" :error="error"/>
@@ -72,6 +72,7 @@ export default {
             repeat_password: '',
             error: '',
             reset_done: false,
+            email: '',
         };
     },
     created() {
@@ -94,8 +95,8 @@ export default {
             } else {
                 PasswordResetService.resetPassword(this.$route.query.token, this.password).then(
                     (response) => {
-                        console.log(response)
                         this.reset_done = true;
+                        this.email = responde.data.email;
                     },
                     (error) => {
                         console.log(error)
