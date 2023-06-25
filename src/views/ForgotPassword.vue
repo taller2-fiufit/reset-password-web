@@ -96,7 +96,7 @@ export default {
                 PasswordResetService.resetPassword(this.$route.query.token, this.password).then(
                     (response) => {
                         this.reset_done = true;
-                        this.email = responde.data.email;
+                        this.email = response.data.email;
                     },
                     (error) => {
                         console.log(error)
