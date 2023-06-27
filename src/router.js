@@ -23,16 +23,5 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, _, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("user") === null) {
-      next({ name: 'Login' })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
 
 export default router

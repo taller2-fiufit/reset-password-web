@@ -75,9 +75,6 @@ export default {
             email: '',
         };
     },
-    created() {
-        console.log(this.$route.query.token)
-    },
     methods: {
         async handleReset() {
             this.loading = true;
@@ -98,8 +95,7 @@ export default {
                         this.reset_done = true;
                         this.email = response.data.email;
                     },
-                    (error) => {
-                        console.log(error)
+                    () => {
                         this.error = "The token isn't valid or it expired."
                     },
                 )
